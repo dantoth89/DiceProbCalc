@@ -11,6 +11,7 @@ public class ToHitTests
     {
         _calculator = new Calculator();
     }
+    
     // array fields: number of attack / target number / re roll / what to re roll / on six / on six event / hit mod
 
     [Test]
