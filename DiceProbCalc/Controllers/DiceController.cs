@@ -14,7 +14,9 @@ public class DiceController : ControllerBase
     [HttpGet]
     public IActionResult Test()
     {
-        double[] final =  _calculator.ToHit(12, 2, false, 1, false, 1, 1, "d6");
+        int[] arr = { 6, 5, 1, 0, 0, 0, 1, 0};
+
+        double[] final =  _calculator.ToHit(arr);
 
         return Ok("The final is: " + final);
     }

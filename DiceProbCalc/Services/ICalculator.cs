@@ -2,7 +2,7 @@
 
 public interface ICalculator
 {
-    public double[] ToHit(int numOfAtk, int targetNum, bool reroll, int toReroll, bool onSix, int onSixEvent, int hitMod, string dmg);
-    public double[] ToWound();
-    public double Save();
+    public double[] ToHit(int[] toHitDataArr);
+    public double[] ToWound(double[] hitsArr, int[] toWoundDataArr);
+    public double Save(double[] woundsArr, int[] saveDataArr);
 }

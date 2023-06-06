@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using DiceProbCalc;
+using DiceProbCalc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
