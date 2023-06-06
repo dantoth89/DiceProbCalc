@@ -1,4 +1,5 @@
 using DiceProbCalc;
+using DiceProbCalc.Services;
 
 namespace DiceTest;
 
