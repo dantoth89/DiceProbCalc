@@ -1,8 +1,11 @@
-﻿namespace DiceProbCalc;
+﻿using DiceProbCalc.Models;
+using DiceProbCalc.Services;
+
+namespace DiceProbCalc;
 
 public interface ICalculator
 {
-    public double[] ToHit(int[] toHitDataArr);
-    public double[] ToWound(double[] hitsArr, int[] toWoundDataArr);
-    public double Save(double[] woundsArr, int[] saveDataArr);
+    public double[]ToHit(HitValues hitValues);
+    public double[] ToWound(double[] hitsArr, WoundValues woundValues);
+    public double Save(double[] woundsArr, SaveValues saveValues);
 }

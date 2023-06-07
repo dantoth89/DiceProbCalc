@@ -20,6 +20,15 @@
     &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.ToWoundTest.ToWound_Test_Pen_Added&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.SaveTest.ToWound_Failed_input_Test&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.SaveTest.Save_Failed_input_Test&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.ToWoundTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.SaveTest.Save_Roll_Low&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.SaveTest.Save_Roll_High&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.SaveTest.Save_Roll_Low_Positive_Mod&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.SaveTest.Save_Roll_High_Positive_Mod&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.SaveTest.Save_Roll_Low_Full_ReRoll&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.SaveTest.Save_Roll_Low_FNP&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.SaveTest.Save_Roll_High_FNP&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.SaveTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=daad0de6_002Dabcf_002D4a23_002Da994_002D45128216c9a1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;

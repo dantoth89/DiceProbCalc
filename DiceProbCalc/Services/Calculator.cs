@@ -1,75 +1,60 @@
-﻿namespace DiceProbCalc.Services;
+﻿using DiceProbCalc.Models;
+
+namespace DiceProbCalc.Services;
+
+
 
 public class Calculator : ICalculator
 {
-    public double[] ToHit(int[] toHitDataArr)
+    public double[] ToHit(HitValues hitValues)
     {
-        int numOfAtk = toHitDataArr[0];
-        int targetNum = toHitDataArr[1];
-        int reRoll = toHitDataArr[2];
-        int toReRoll = toHitDataArr[3];
-        int onSixEvent = toHitDataArr[4];
-        int hitMod = toHitDataArr[5];
-
-        var finalTargetNum = CheckMod(targetNum, hitMod);
-        var baseRoll = BaseRoll(numOfAtk, finalTargetNum);
-        double finalHit = baseRoll;
-
         // number of hits , auto wound hits , mortal wounds
         double[] finalHitData = { 0, 0, 0 };
+        var finalTargetNum = CheckMod(hitValues.targetRoll, hitValues.hitMod);
+        var baseRoll = BaseRoll(hitValues.numberOfAttacks, finalTargetNum);
 
-        if (WrongInputHandler(numOfAtk, targetNum, onSixEvent))
+        if (WrongInputHandler(hitValues.numberOfAttacks, hitValues.targetRoll, hitValues.onSixEvent))
             return finalHitData;
-
-        var reRolledAmount = finalHit;
-        finalHit = ReRoll(numOfAtk, reRoll, toReRoll, finalHit, baseRoll, finalTargetNum);
-        reRolledAmount = finalHit - reRolledAmount;
+        
+        double finalHit = ReRoll(hitValues.numberOfAttacks, hitValues.reRoll, hitValues.toReRoll, baseRoll, finalTargetNum);
+        double reRolledAmount = finalHit - baseRoll;
 
         finalHit = CutToTwoDecimalDigit(finalHit);
 
-        finalHitData = HandleSixesOnHit(finalHit, numOfAtk, onSixEvent, reRolledAmount);
+        finalHitData = HandleSixesOnHit(finalHit, hitValues.numberOfAttacks, hitValues.onSixEvent, reRolledAmount);
         return finalHitData;
     }
 
-    public double[] ToWound(double[] hitsArr, int[] toWoundDataArr)
+    public double[] ToWound(double[] hitsArr, WoundValues woundValues)
     {
         int numberOfHits = (int)Math.Floor(hitsArr[0]);
         int autoWounds = (int)Math.Floor(hitsArr[1]);
         int mortalWounds = (int)Math.Floor(hitsArr[2]);
 
-        int targetNum = toWoundDataArr[0];
-        int reRoll = toWoundDataArr[1];
-        int toReRoll = toWoundDataArr[2];
-        int onSixEvent = toWoundDataArr[3];
-        int woundMod = toWoundDataArr[4];
-        int penetration = toWoundDataArr[5];
-        int damage = toWoundDataArr[6];
-
-        var finalTargetNum = CheckMod(targetNum, woundMod);
+        var finalTargetNum = CheckMod(woundValues.targetNum, woundValues.woundMod);
         var baseRoll = BaseRoll(numberOfHits, finalTargetNum);
         double finalWound = baseRoll;
         // wounds / penetration / mortal wounds / wounds with increased penetration / amount of increase / damage per wound
         double[] finalWoundData = { 0, 0, 0, 0, 0, 0 };
 
-        if (WrongInputHandler(numberOfHits, targetNum, onSixEvent))
+        if (WrongInputHandler(numberOfHits, woundValues.targetNum, woundValues.onSixEvent))
             return finalWoundData;
 
         var reRolledAmount = finalWound;
-        finalWound = ReRoll(numberOfHits, reRoll, toReRoll, finalWound, baseRoll, finalTargetNum);
+        finalWound = ReRoll(numberOfHits, woundValues.reRoll, woundValues.toReRoll, baseRoll, finalTargetNum);
         reRolledAmount = finalWound - reRolledAmount;
 
         finalWound = CutToTwoDecimalDigit(finalWound);
 
-        finalWoundData = HandleSixesOnWound(finalWound, numberOfHits, onSixEvent, reRolledAmount, penetration, damage);
+        finalWoundData = HandleSixesOnWound(finalWound, numberOfHits, woundValues.onSixEvent, reRolledAmount, woundValues.penetration, woundValues.damage);
 
         if (mortalWounds == autoWounds && mortalWounds != 0)
-            finalWoundData[2] = mortalWounds * damage;
-
+            finalWoundData[2] = mortalWounds * woundValues.damage;
 
         return finalWoundData;
     }
 
-    public double Save(double[] woundsArr, int[] saveDataArr)
+    public double Save(double[] woundsArr, SaveValues saveValues)
     {
         // wounds / penetration / mortal wounds / wounds with increased penetration / amount of increase / damage per wound
 
@@ -79,41 +64,30 @@ public class Calculator : ICalculator
         int woundsWithIncPen = (int)Math.Floor(woundsArr[3]);
         int amountOfIncPen = (int)Math.Floor(woundsArr[4]);
         int damage = (int)Math.Floor(woundsArr[5]);
-
-        int save = saveDataArr[0];
-        int saveMod = saveDataArr[1];
-        int cover = saveDataArr[2];
-        int reRoll = saveDataArr[3];
-        int toReRoll = saveDataArr[4];
-        int feelNoPain = saveDataArr[5];
-
-        double finalUnsavedWound;
-        
-
-        var finalSaveNum = save + saveMod - penetration;
+   
+        var finalSaveNum = saveValues.save - saveValues.saveMod + penetration;
         if (finalSaveNum > 3)
-            if (cover > 0)
-                finalSaveNum += 1;
+            if (saveValues.cover > 0)
+                finalSaveNum -= 1;
         
         if (WrongInputHandler(saveRolls, finalSaveNum, 0))
             return -1;
-
-        double reRolledAmount = finalSaveNum;
+        
         var baseRoll = BaseRoll(saveRolls, finalSaveNum);
 
-        finalUnsavedWound = ReRoll(saveRolls, reRoll, toReRoll, reRolledAmount, baseRoll, finalSaveNum);
-        //reRolledAmount = finalUnsavedWound - reRolledAmount;
+        double savedWound = ReRoll(saveRolls, saveValues.reRoll, saveValues.toReRoll, baseRoll, finalSaveNum);
 
         if (woundsWithIncPen < 0)
-            finalUnsavedWound += BaseRoll(woundsWithIncPen, save + saveMod - penetration - amountOfIncPen);
+            savedWound += BaseRoll(woundsWithIncPen, saveValues.save + saveValues.saveMod - penetration - amountOfIncPen);
 
-        finalUnsavedWound *= damage;
+        double unsavedWound = saveRolls - savedWound;
+        unsavedWound *= damage;
 
-        if (feelNoPain > 0)
-            finalUnsavedWound -= (finalUnsavedWound + mortalWounds) * (feelNoPain - 1 / 6);
+        if (saveValues.feelNoPain > 0)
+            unsavedWound = (unsavedWound + mortalWounds) * (saveValues.feelNoPain - 1.0) / 6.0;
 
-        finalUnsavedWound = CutToTwoDecimalDigit(finalUnsavedWound);
-        return finalUnsavedWound;
+        unsavedWound = CutToTwoDecimalDigit(unsavedWound);
+        return unsavedWound;
     }
 
     private double[] HandleSixesOnWound(double finalWound, int numberOfHits, int eventNum, double reRolledAmount,
@@ -223,9 +197,9 @@ public class Calculator : ICalculator
         int finalTargetNum = targetNum - mod;
 
         if (finalTargetNum < 1)
-            finalTargetNum = 1;
-        else if (finalTargetNum > 6)
-            finalTargetNum = 6;
+            return 1;
+        if (finalTargetNum > 6)
+            return 6;
 
         return finalTargetNum;
     }
@@ -235,20 +209,21 @@ public class Calculator : ICalculator
         return Math.Ceiling(rolls / 6);
     }
 
-    private static double ReRoll(int numOfAtk, int reRoll, int toReRoll, double finalHit, double baseRoll,
+    private static double ReRoll(int numOfAtk, int reRoll, int toReRoll, double baseRoll,
         int finalTargetNum)
     {
+        double targetRoll = (finalTargetNum - 1.0) / 6.0;
         if (reRoll > 0)
             if (toReRoll == 0)
-                finalHit += (numOfAtk - baseRoll) * ((double)(finalTargetNum - 1) / 6);
+                baseRoll += (numOfAtk - baseRoll) * targetRoll;
             else
-                finalHit += (numOfAtk * toReRoll / 6) * ((double)(finalTargetNum - 1) / 6);
-        return finalHit;
+                baseRoll += (numOfAtk * toReRoll / 6.0) * targetRoll;
+        return baseRoll;
     }
 
     private static double BaseRoll(int rollAmount, int finalTargetNum)
     {
-        double baseRoll = rollAmount - (rollAmount * ((double)(finalTargetNum - 1) / 6));
+        double baseRoll = rollAmount - rollAmount * (finalTargetNum - 1.0) / 6.0;
         return baseRoll;
     }
 }
