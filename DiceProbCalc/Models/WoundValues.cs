@@ -1,8 +1,11 @@
-﻿namespace DiceProbCalc.Models;
+﻿using DiceProbCalc.Models.Enums;
+
+namespace DiceProbCalc.Models;
 
 public class WoundValues
 {
-    public WoundValues(int targetNum, int reRoll, int toReRoll, int onSixEvent, int woundMod, int penetration,
+    public WoundValues(int targetNum, int reRoll, int toReRoll, WoundOnSixEvent onSixEvent, int woundMod,
+        int penetration,
         int damage)
     {
         this.targetNum = targetNum;
@@ -13,10 +16,11 @@ public class WoundValues
         this.penetration = penetration;
         this.damage = damage;
     }
+
     public int targetNum;
     public int reRoll;
     public int toReRoll;
-    public int onSixEvent;
+    public WoundOnSixEvent onSixEvent;
     public int woundMod;
     public int penetration;
     public int damage;

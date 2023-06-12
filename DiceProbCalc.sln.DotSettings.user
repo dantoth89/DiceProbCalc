@@ -1,5 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1e8e90e4_002D2897_002D4ca0_002Dbec2_002D3634a5891d4e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1 #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1e8e90e4_002D2897_002D4ca0_002Dbec2_002D3634a5891d4e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.ToHitTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.ToWoundTest.ToWound_Failed_input_Test&lt;/TestId&gt;&#xD;
@@ -31,8 +31,11 @@
     &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.SaveTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=daad0de6_002Dabcf_002D4a23_002Da994_002D45128216c9a1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=daad0de6_002Dabcf_002D4a23_002Da994_002D45128216c9a1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.Tests.Test1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.ToHitTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.SaveTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.ToWoundTest.ToWound_Test_High_Chance&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3E2448DE-D9FF-4369-8168-BBF93A2CB1C5::net7.0::DiceTest.ToWoundTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

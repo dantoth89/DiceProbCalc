@@ -5,7 +5,7 @@ namespace DiceProbCalc;
 
 public interface ICalculator
 {
-    public double[]ToHit(HitValues hitValues);
-    public double[] ToWound(double[] hitsArr, WoundValues woundValues);
-    public double Save(double[] woundsArr, SaveValues saveValues);
+    public HitResults ToHit(HitValues hitValues);
+    public WoundResults ToWound(HitResults hitResults, WoundValues woundValues);
+    public double Save(WoundResults woundResults, SaveValues saveValues);
 }

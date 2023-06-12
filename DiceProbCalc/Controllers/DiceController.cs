@@ -15,6 +15,6 @@ public class DiceController : ControllerBase
     [HttpGet]
     public IActionResult Test()
     {
-        return Ok("The final is: SZAR!!");
+        return Ok("Not yet");
     }
 }

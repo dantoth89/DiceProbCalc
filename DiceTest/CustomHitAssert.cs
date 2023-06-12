@@ -26,6 +26,13 @@ public static class CustomHitAssert
 
         if (expected is HitResults expectedHitResults && actual is HitResults actualHitResults)
         {
+            Console.WriteLine(expectedHitResults.numberOfHits
+                              + " " + actualHitResults.numberOfHits
+                              + " ," + expectedHitResults.autoWounds
+                              + " " + actualHitResults.autoWounds
+                              + " ," + expectedHitResults.mortalWounds
+                              + " " + actualHitResults.mortalWounds);
+
             return expectedHitResults.numberOfHits == actualHitResults.numberOfHits &&
                    expectedHitResults.autoWounds == actualHitResults.autoWounds &&
                    expectedHitResults.mortalWounds == actualHitResults.mortalWounds;
