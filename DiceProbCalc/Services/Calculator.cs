@@ -5,16 +5,15 @@ namespace DiceProbCalc.Services;
 
 public class Calculator : ICalculator
 {
-    public HitResults? ToHit(HitValues hitValues)
+    public HitResults ToHit(HitValues hitValues)
     {
         // number of hits , auto wound hits , mortal wounds
         double[] finalHitData = { 0, 0, 0 };
-        var finalTargetNum = CheckMod(hitValues.targetRoll, hitValues.hitMod);
-        var baseRoll = BaseRoll(hitValues.numberOfAttacks, finalTargetNum);
-
         if (InputHandler(hitValues.numberOfAttacks, hitValues.targetRoll))
             return new HitResults(finalHitData);
 
+        var finalTargetNum = CheckMod(hitValues.targetRoll, hitValues.hitMod);
+        var baseRoll = BaseRoll(hitValues.numberOfAttacks, finalTargetNum);
         double finalHit = ReRoll(hitValues.numberOfAttacks, hitValues.reRoll, hitValues.toReRoll, baseRoll,
             finalTargetNum);
         double reRolledAmount = finalHit - baseRoll;
@@ -27,16 +26,14 @@ public class Calculator : ICalculator
 
     public WoundResults ToWound(HitResults hitResults, WoundValues woundValues)
     {
+        // wounds / penetration / mortal wounds / wounds with increased penetration / amount of increase / damage per wound
+        double[] finalWoundData = { 0, 0, 0, 0, 0, 0 };
+        if (InputHandler(hitResults.numberOfHits, woundValues.targetNum))
+            return new WoundResults(finalWoundData);
+        
         var finalTargetNum = CheckMod(woundValues.targetNum, woundValues.woundMod);
         var baseRoll = BaseRoll(hitResults.numberOfHits, finalTargetNum);
         double finalWound = baseRoll;
-
-        // wounds / penetration / mortal wounds / wounds with increased penetration / amount of increase / damage per wound
-        double[] finalWoundData = { 0, 0, 0, 0, 0, 0 };
-
-        if (InputHandler(hitResults.numberOfHits, woundValues.targetNum))
-            return new WoundResults(finalWoundData);
-
         var reRolledAmount = finalWound;
         finalWound = ReRoll(hitResults.numberOfHits, woundValues.reRoll, woundValues.toReRoll, baseRoll,
             finalTargetNum);
@@ -56,7 +53,6 @@ public class Calculator : ICalculator
     public double Save(WoundResults woundResults, SaveValues saveValues)
     {
         // wounds / penetration / mortal wounds / wounds with increased penetration / amount of increase / damage per wound
-
         var finalSaveNum = saveValues.save - saveValues.saveMod + (int)woundResults.penetration;
         if (finalSaveNum > 3)
             if (saveValues.cover > 0)
@@ -67,15 +63,15 @@ public class Calculator : ICalculator
 
         var baseRoll = BaseRoll(woundResults.saveRolls, finalSaveNum);
 
-        double savedWound = ReRoll(woundResults.saveRolls, saveValues.reRoll, saveValues.toReRoll, baseRoll,
+        double savedAttack = ReRollSave(woundResults.saveRolls, saveValues.reRoll, saveValues.toReRoll, baseRoll,
             finalSaveNum);
+        
+        // if ((int)woundResults.woundsWithIncPen < 0)
+        //     savedAttack += BaseRoll(woundResults.woundsWithIncPen,
+        //         saveValues.save + saveValues.saveMod - (int)woundResults.penetration -
+        //         (int)woundResults.amountOfIncPen);
 
-        if ((int)woundResults.woundsWithIncPen < 0)
-            savedWound += BaseRoll(woundResults.woundsWithIncPen,
-                saveValues.save + saveValues.saveMod - (int)woundResults.penetration -
-                (int)woundResults.amountOfIncPen);
-
-        double unsavedWound = (int)woundResults.saveRolls - savedWound;
+        double unsavedWound = (int)woundResults.saveRolls - savedAttack;
         unsavedWound *= (int)woundResults.damage;
 
         if (saveValues.feelNoPain > 0)
@@ -200,7 +196,18 @@ public class Calculator : ICalculator
                 baseRoll += targetRoll * (numOfAtk * toReRoll / 6);
         return baseRoll;
     }
-
+    
+    private static double ReRollSave(double numOfSaveRolls, int reRoll, int toReRoll, double baseRoll, int finalTargetNum)
+    {
+        double targetRoll = 1 - (finalTargetNum - 1.0) / 6.0;
+        if (reRoll > 0)
+            if (toReRoll == 0)
+                baseRoll += targetRoll * (numOfSaveRolls - baseRoll);
+            else
+                baseRoll += targetRoll * (numOfSaveRolls * toReRoll / 6);
+        return baseRoll;
+    }
+    
     private static double BaseRoll(double rollAmount, int finalTargetNum)
     {
         return rollAmount - rollAmount * (finalTargetNum - 1) / 6;
