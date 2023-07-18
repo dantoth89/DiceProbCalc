@@ -108,20 +108,20 @@ public class SaveTest
     [Test]
     public void Save_Roll_Low_Full_ReRoll()
     {
-        SaveValues saveValues = new SaveValues( 4, 0, 0, 1, 0, 0 );
+        SaveValues saveValues = new SaveValues( 5, 0, 0, 1, 0, 0 );
         WoundResults woundResults = new WoundResults( 12, 0, 0, 0, 0, 1 );
         double result = _calculator.Save(woundResults, saveValues);
-        double expected = 3;
+        double expected = 5.33;
         Assert.AreEqual(expected, result);
     }
     
     [Test]
     public void Save_Roll_High_Full_ReRoll()
     {
-        SaveValues saveValues = new SaveValues( 4, 0, 0, 1, 0, 0 );
+        SaveValues saveValues = new SaveValues( 5, 0, 0, 1, 0, 0 );
         WoundResults woundResults = new WoundResults( 60, 0, 0, 0, 0, 1 );
         double result = _calculator.Save(woundResults, saveValues);
-        double expected = 15;
+        double expected = 26.66;
         Assert.AreEqual(expected, result);
     }
     
