@@ -11,9 +11,9 @@ public class HitResults
     
     public HitResults(double[] hitResults)
     {
-        this.numberOfHits = hitResults[0];
-        this.autoWounds = hitResults[1];
-        this.mortalWounds = hitResults[2];
+        numberOfHits = hitResults[0];
+        autoWounds = hitResults[1];
+        mortalWounds = hitResults[2];
     }
     
     public double numberOfHits;
