@@ -66,11 +66,6 @@ public class Calculator : ICalculator
         double savedAttack = ReRollSave(woundResults.saveRolls, saveValues.reRoll, saveValues.toReRoll, baseRoll,
             finalSaveNum);
         
-        // if ((int)woundResults.woundsWithIncPen < 0)
-        //     savedAttack += BaseRoll(woundResults.woundsWithIncPen,
-        //         saveValues.save + saveValues.saveMod - (int)woundResults.penetration -
-        //         (int)woundResults.amountOfIncPen);
-
         double unsavedWound = (int)woundResults.saveRolls - savedAttack;
         unsavedWound *= (int)woundResults.damage;
 

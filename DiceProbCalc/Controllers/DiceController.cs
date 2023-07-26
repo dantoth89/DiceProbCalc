@@ -1,10 +1,12 @@
 ﻿using DiceProbCalc.Models;
 using DiceProbCalc.Models.Enums;
 using DiceProbCalc.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiceProbCalc;
 
+[EnableCors]
 [ApiController, Route("[controller]")]
 public class DiceController : ControllerBase
 {
@@ -29,20 +31,20 @@ public class DiceController : ControllerBase
         return Ok("Not yet, final fix test " + final);
     }
 
-    [HttpGet("/body")]
+    [HttpPost("/body")]
     public IActionResult TestBody([FromBody] AllValues allValues)
     {
-        var HV = new HitValues(allValues.numberOfAttacks, allValues.targetRoll, allValues.hitReRoll,
+        var HV = new HitValues(allValues.numberOfAttacks, allValues.targetRollToHit, allValues.hitReRoll,
             allValues.hitToReRoll, allValues.hitOnSixEvent, allValues.hitMod);
-        var WV = new WoundValues(allValues.targetNum, allValues.woundReRoll, allValues.woundToReRoll,
+        var WV = new WoundValues(allValues.targetRollToWound, allValues.woundReRoll, allValues.woundToReRoll,
             allValues.woundOnSixEvent, allValues.woundMod, allValues.penetration, allValues.damage);
         var SV = new SaveValues(allValues.save, allValues.saveMod, allValues.cover, allValues.saveReRoll,
             allValues.saveToReRoll, allValues.feelNoPain);
-
+        
         var hits = _calculator.ToHit(HV);
         var wounds = _calculator.ToWound(hits, WV);
         var final = _calculator.Save(wounds, SV);
 
-        return Ok("Not yet, frombody test " + final);
+        return Ok(final);
     }
 }
