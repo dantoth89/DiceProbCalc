@@ -26,8 +26,8 @@ public class Calculator : ICalculator
 
     public WoundResults ToWound(HitResults hitResults, WoundValues woundValues)
     {
-        // wounds / penetration / mortal wounds / wounds with increased penetration / amount of increase / damage per wound
-        double[] finalWoundData = { 0, 0, 0, 0, 0, 0 };
+        // wounds / penetration / mortal wounds / damage per wound
+        double[] finalWoundData = { 0, 0, 0, 0 };
         if (InputHandler(hitResults.numberOfHits, woundValues.targetNum))
             return new WoundResults(finalWoundData);
         
@@ -52,7 +52,7 @@ public class Calculator : ICalculator
 
     public double Save(WoundResults woundResults, SaveValues saveValues)
     {
-        // wounds / penetration / mortal wounds / wounds with increased penetration / amount of increase / damage per wound
+        // wounds / penetration / mortal wounds / damage per wound
         var finalSaveNum = saveValues.save - saveValues.saveMod + (int)woundResults.penetration;
         if (finalSaveNum > 3)
             if (saveValues.cover > 0)
@@ -80,17 +80,12 @@ public class Calculator : ICalculator
         double reRolledAmount,
         int penetration, int damage)
     {
-        // wounds / penetration / mortal wounds / wounds with increased penetration / amount of increase / damage per wound
-        double[] finalSixWoundData = { 0, penetration, 0, 0, 0, damage };
+        // wounds / penetration / mortal wounds  / damage per wound
+        double[] finalSixWoundData = { 0, penetration, 0, damage };
         var sixes = NumOfSix(numberOfHits) + NumOfSix(reRolledAmount);
 
         switch (sixEvent)
         {
-            case WoundOnSixEvent.MinusOnePenetration:
-                finalSixWoundData[0] = finalWound;
-                finalSixWoundData[3] = sixes;
-                finalSixWoundData[4] = 1;
-                break;
             case WoundOnSixEvent.PlusOneMortalWound:
                 finalSixWoundData[0] = finalWound;
                 finalSixWoundData[2] = sixes;

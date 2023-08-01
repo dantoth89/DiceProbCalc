@@ -3,7 +3,6 @@
 public enum WoundOnSixEvent
 {
     NoEvent = 0,
-    MinusOnePenetration = 1,
-    PlusOneMortalWound = 2,
-    DealDamageAsMortalWound = 3,
+    PlusOneMortalWound = 1,
+    DealDamageAsMortalWound = 2,
 }

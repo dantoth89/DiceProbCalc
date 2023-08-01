@@ -22,7 +22,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(0, 0, 0);
         WoundValues woundValues = new WoundValues(0, 2, 0, 0, 1, 0, 0);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(0, 0, 0, 0, 0, 0);
+        WoundResults expected = new WoundResults(0, 0, 0, 0);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -32,7 +32,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(12, 0, 0);
         WoundValues woundValues = new WoundValues(2, 0, 0, 0, 0, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(10, 0, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(10, 0,  0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -42,7 +42,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(12, 0, 0);
         WoundValues woundValues = new WoundValues(6, 0, 0, 0, 0, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(2, 0, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(2, 0, 0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -52,7 +52,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(12, 0, 0);
         WoundValues woundValues = new WoundValues(4, 0, 0, 0, 0, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(6, 0, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(6, 0,  0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -62,7 +62,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(12, 0, 0);
         WoundValues woundValues = new WoundValues(4, 0, 0, 0, 0, 2, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(6, 2, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(6, 2,  0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -72,7 +72,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(3, 0, 0);
         WoundValues woundValues = new WoundValues(4, 0, 0, 0, 0, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(1.5, 0, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(1.5, 0,  0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -82,7 +82,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(1, 0, 0);
         WoundValues woundValues = new WoundValues(6, 0, 0, 0, 0, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(0.16, 0, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(0.16, 0,  0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -92,7 +92,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(12, 0, 0);
         WoundValues woundValues = new WoundValues(5, 0, 0, 0, 1, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(6, 0, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(6, 0,  0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -102,7 +102,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(12, 0, 0);
         WoundValues woundValues = new WoundValues(5, 0, 0, 0, 100, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(6, 0, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(6, 0, 0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -112,7 +112,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(12, 0, 0);
         WoundValues woundValues = new WoundValues(3, 0, 0, 0, -1, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(6, 0, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(6, 0,  0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -122,7 +122,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(12, 0, 0);
         WoundValues woundValues = new WoundValues(3, 0, 0, 0, -100, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(6, 0, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(6, 0,  0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -132,7 +132,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(12, 0, 0);
         WoundValues woundValues = new WoundValues(4, 1, 0, 0, 0, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(9, 0, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(9, 0,  0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -142,7 +142,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(6, 0, 0);
         WoundValues woundValues = new WoundValues(4, 1, 1, 0, 0, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(3.5, 0, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(3.5, 0,  0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -152,7 +152,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(42, 0, 0);
         WoundValues woundValues = new WoundValues(4, 1, 1, 0, 0, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(24.5, 0, 0, 0, 0, 1);
+        WoundResults expected = new WoundResults(24.5, 0,  0, 1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -162,27 +162,17 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(6, 0, 0);
         WoundValues woundValues = new WoundValues(4, 0, 0, WoundOnSixEvent.PlusOneMortalWound, 0, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(3, 0, 1, 0, 0, 1);
+        WoundResults expected = new WoundResults(3, 0, 1,  1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
-    [Test]
-    public void ToWound_Test_Ap_Six()
-    {
-        HitResults hitResults = new HitResults(6, 0, 0);
-        WoundValues woundValues = new WoundValues(4, 0, 0, WoundOnSixEvent.MinusOnePenetration, 0, 0, 1);
-        WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(3, 0, 0, 1, 1, 1);
-        CustomWoundAssert.AreEqual(expected, result);
-    }
-
-    [Test]
+  [Test]
     public void ToWound_Test_DMG_as_MW_Six_1()
     {
         HitResults hitResults = new HitResults(6, 0, 0);
         WoundValues woundValues = new WoundValues(4, 0, 0, WoundOnSixEvent.DealDamageAsMortalWound, 0, 0, 1);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(2, 0, 1, 0, 0, 1);
+        WoundResults expected = new WoundResults(2, 0, 1,  1);
         CustomWoundAssert.AreEqual(expected, result);
     }
 
@@ -192,7 +182,7 @@ public class ToWoundTest
         HitResults hitResults = new HitResults(12, 0, 0);
         WoundValues woundValues = new WoundValues(4, 0, 0, WoundOnSixEvent.DealDamageAsMortalWound, 0, 0, 2);
         WoundResults result = _calculator.ToWound(hitResults, woundValues);
-        WoundResults expected = new WoundResults(4, 0, 4, 0, 0, 2);
+        WoundResults expected = new WoundResults(4, 0, 4,  2);
         CustomWoundAssert.AreEqual(expected, result);
     }
 }

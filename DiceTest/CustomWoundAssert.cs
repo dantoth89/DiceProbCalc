@@ -26,8 +26,6 @@ public class CustomWoundAssert
             return expectedWoundResults.saveRolls == actualWoundResults.saveRolls &&
                    expectedWoundResults.penetration == actualWoundResults.penetration &&
                    expectedWoundResults.mortalWounds == actualWoundResults.mortalWounds &&
-                   expectedWoundResults.woundsWithIncPen == actualWoundResults.woundsWithIncPen &&
-                   expectedWoundResults.amountOfIncPen == actualWoundResults.amountOfIncPen &&
                    expectedWoundResults.damage == actualWoundResults.damage;
         }
 
