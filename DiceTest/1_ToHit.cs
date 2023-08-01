@@ -209,7 +209,7 @@ public class ToHitTests
     {
         HitValues attack = new HitValues( 6, 4, 0, 0, HitOnSixEvent.DealDamageAsMortal, 0 );
         HitResults result = _calculator.ToHit(attack);
-        HitResults expected = new HitResults( 3, 1, 1 );
+        HitResults expected = new HitResults( 3, 0, -1 );
         CustomHitAssert.AreEqual(expected, result);
     }
     
@@ -218,7 +218,7 @@ public class ToHitTests
     {
         HitValues attack = new HitValues( 36, 4, 0, 0, HitOnSixEvent.DealDamageAsMortal, 0 );
         HitResults result = _calculator.ToHit(attack);
-        HitResults expected = new HitResults( 18, 6, 6 );
+        HitResults expected = new HitResults( 18, 0, -6 );
         CustomHitAssert.AreEqual(expected, result);
     }
     

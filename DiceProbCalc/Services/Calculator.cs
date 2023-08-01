@@ -44,9 +44,11 @@ public class Calculator : ICalculator
         finalWoundData = HandleSixesOnWound(finalWound, hitResults.numberOfHits, woundValues.onSixEvent,
             reRolledAmount, woundValues.penetration, woundValues.damage);
 
-        if ((int)hitResults.mortalWounds == (int)hitResults.autoWounds && (int)hitResults.mortalWounds != 0)
-            finalWoundData[2] = (int)hitResults.mortalWounds * woundValues.damage;
-
+        if (hitResults.mortalWounds < 0)
+            finalWoundData[2] += Math.Abs(hitResults.mortalWounds) * woundValues.damage;
+        else
+            finalWoundData[2] += hitResults.mortalWounds;
+        
         return new WoundResults(finalWoundData);
     }
 
@@ -61,6 +63,9 @@ public class Calculator : ICalculator
         if (InputHandler(woundResults.saveRolls, finalSaveNum))
             return -1;
 
+        if (finalSaveNum > 6)
+            finalSaveNum = 7;
+        
         var baseRoll = BaseRoll(woundResults.saveRolls, finalSaveNum);
 
         double savedAttack = ReRollSave(woundResults.saveRolls, saveValues.reRoll, saveValues.toReRoll, baseRoll,
@@ -71,6 +76,8 @@ public class Calculator : ICalculator
 
         if (saveValues.feelNoPain > 0)
             unsavedWound = (unsavedWound + (int)woundResults.mortalWounds) * (saveValues.feelNoPain - 1.0) / 6.0;
+        else
+            unsavedWound = (unsavedWound + (int)woundResults.mortalWounds);
 
         unsavedWound = CutToTwoDecimalDigit(unsavedWound);
         return unsavedWound;
@@ -88,11 +95,11 @@ public class Calculator : ICalculator
         {
             case WoundOnSixEvent.PlusOneMortalWound:
                 finalSixWoundData[0] = finalWound;
-                finalSixWoundData[2] = sixes;
+                finalSixWoundData[2] += sixes;
                 break;
             case WoundOnSixEvent.DealDamageAsMortalWound:
                 finalSixWoundData[0] = finalWound - sixes;
-                finalSixWoundData[2] = sixes * damage;
+                finalSixWoundData[2] += sixes * damage;
                 break;
             default:
                 finalSixWoundData[0] = finalWound;
@@ -137,8 +144,7 @@ public class Calculator : ICalculator
                 break;
             case HitOnSixEvent.DealDamageAsMortal:
                 finalSixHitData[0] = finalHit;
-                finalSixHitData[1] = sixes;
-                finalSixHitData[2] = sixes;
+                finalSixHitData[2] -= sixes;
                 break;
             default:
                 finalSixHitData[0] = finalHit;
